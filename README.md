@@ -1,7 +1,7 @@
 # Registration System
-JavaFX with MySQL database integration
+  &nbsp;&nbsp;&nbsp;&nbsp; JavaFX with MySQL database integration
 
-Stepping through GitHub's project planner
+  &nbsp;&nbsp;&nbsp;&nbsp; Stepping through GitHub's project planner
 
 ## Initial(Expected) Design:
 **Login Screen**
