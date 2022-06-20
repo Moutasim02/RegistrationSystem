@@ -1,4 +1,4 @@
-# RegistrationSystem
+# Registration System
 JavaFX with MySQL database integration
 
 Stepping through GitHub's project planner
