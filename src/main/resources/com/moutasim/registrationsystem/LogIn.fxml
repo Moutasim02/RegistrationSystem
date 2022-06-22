@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.moutasim.registrationsystem.LogInController">
    <children>
       <Label layoutX="84.0" layoutY="35.0" text="Your Smart Home" textFill="#666262">
          <font>
@@ -33,32 +32,22 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="53.0" layoutY="322.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="244.0" style="-fx-background-color: #FC6439; -fx-background-radius: 7px; -fx-text-fill: #fff;" text="Login">
+      <Button fx:id="btnLogIn" layoutX="53.0" layoutY="322.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="244.0" style="-fx-background-color: #FC6439; -fx-background-radius: 7px; -fx-text-fill: #fff;" text="Login">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <RadioButton layoutX="53.0" layoutY="284.0" mnemonicParsing="false" text="Remember me" />
-      <Hyperlink layoutX="175.0" layoutY="281.0" text="Forgot Password?" textFill="#1b1b1b">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Hyperlink>
-      <TextField layoutX="53.0" layoutY="172.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;">
+      <RadioButton fx:id="rbtnRemember" layoutX="53.0" layoutY="284.0" mnemonicParsing="false" text="Remember me" />
+      <TextField fx:id="txtEmail" layoutX="53.0" layoutY="172.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
-      <TextField layoutX="53.0" layoutY="236.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;" />
+      <TextField fx:id="txtPassword" layoutX="53.0" layoutY="236.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;" />
       <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/smart-house.png" />
          </image>
       </ImageView>
-      <Hyperlink layoutX="53.0" layoutY="391.0" text="No Account? Sign Up." textFill="#1b1b1b">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Hyperlink>
       <Label layoutX="53.0" layoutY="92.0" prefHeight="39.0" prefWidth="259.0" text="Welcome back! Log in using you already&#10;registered creditials." textFill="#666262">
          <font>
             <Font size="12.0" />
@@ -69,5 +58,15 @@
             <Image url="@images/background.jpg" />
          </image>
       </ImageView>
+      <Button fx:id="btnForgotPassword" layoutX="175.0" layoutY="280.0" mnemonicParsing="false" onAction="#resetPassword" style="-fx-background-color: #fff;" text="Forgot Password?">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnToSignUp" layoutX="54.0" layoutY="390.0" mnemonicParsing="false" onAction="#toSignUp" prefWidth="156.0" style="-fx-background-color: #fff;" text="No Account? Sign Up.">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
