@@ -68,5 +68,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="lblMailError" layoutX="98.0" layoutY="147.0" prefHeight="18.0" prefWidth="193.0" textFill="RED" />
+      <Label fx:id="lblPasswordError" layoutX="125.0" layoutY="211.0" prefHeight="18.0" prefWidth="166.0" textFill="RED" />
    </children>
 </AnchorPane>
