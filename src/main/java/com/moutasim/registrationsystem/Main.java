@@ -14,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
             Scene scene = new Scene(root);
             primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images/smart-house.png")));
             primaryStage.setTitle("Registration System");

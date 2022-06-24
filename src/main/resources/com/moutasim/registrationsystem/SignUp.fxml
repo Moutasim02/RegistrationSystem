@@ -38,7 +38,7 @@
                 <Image url="@images/smart-house.png" />
             </image>
         </ImageView>
-        <Label layoutX="53.0" layoutY="82.0" prefHeight="39.0" prefWidth="276.0" text="Sign up with your data to start controlling your&#10;home." textFill="#666262">
+        <Label layoutX="53.0" layoutY="82.0" prefHeight="39.0" prefWidth="276.0" text="Sign up with your credentials to start controlling&#10;your home." textFill="#666262">
             <font>
                 <Font size="12.0" />
             </font>
@@ -82,7 +82,7 @@
       <Label fx:id="lblEmailError" layoutX="95.0" layoutY="196.0" prefHeight="18.0" prefWidth="223.0" textFill="RED" />
       <Label fx:id="lblPasswordError" layoutX="112.0" layoutY="261.0" prefHeight="18.0" prefWidth="208.0" textFill="RED" />
       <Label fx:id="lblAgreementError" layoutX="66.0" layoutY="390.0" prefHeight="18.0" prefWidth="244.0" textFill="RED" />
-      <Label fx:id="successMessage" layoutX="55.0" layoutY="119.0" prefHeight="18.0" prefWidth="244.0" textFill="GREEN">
+      <Label fx:id="feedbackMessage" layoutX="55.0" layoutY="119.0" prefHeight="18.0" prefWidth="244.0" textFill="GREEN">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>

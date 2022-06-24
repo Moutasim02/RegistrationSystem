@@ -7,13 +7,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
+
+
+/* Steps:
+ * Check for blank fields
+ * Check values validity
+ * check Existance in Database
+ * Sign Up and Write to Database */
 
 public class SignUpController {
     @FXML
@@ -23,11 +36,9 @@ public class SignUpController {
     @FXML
     private PasswordField secretField;
     @FXML
-    private Label successMessage;
+    private Label feedbackMessage;
     @FXML
     private RadioButton rbtnAgreement;
-    @FXML
-    private Button btnToLogIn;
     @FXML
     private Label lblEmailError;
     @FXML
@@ -36,8 +47,6 @@ public class SignUpController {
     private Label lblPasswordError;
     @FXML
     private Label lblAgreementError;
-    private Stage stage;
-    private Scene scene;
     private Parent root;
 
     public void signUp(ActionEvent e) {
@@ -47,68 +56,51 @@ public class SignUpController {
         String pass = secretField.getText();
         PreparedStatement insertion;
 
-        try {
-            insertion = connection.prepareStatement("INSERT INTO registered_users (username, email, password) VALUES ("
-                                                        + "'" + username + "','" + email + "','" + pass + "')");
-            boolean duplicateCheckResult = checkExistanceInRecords(username, email, connection);
-            if (duplicateCheckResult == true) {
-                insertValues(username, email, pass, insertion);
+        boolean allChecksSucceed = allChecksSucceed(connection, username, email, pass);
+        if (allChecksSucceed == true) {
+            try {
+                insertion = connection.prepareStatement("INSERT INTO registered_users (username, email, password) VALUES ("
+                        + "'" + username + "','" + email + "','" + pass + "')");
+                insertion.execute();
+                cleanErrors();
+                cleanFields();
+                toLogIn(e);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (SQLException ex) {
-            successMessage.setTextFill(Color.RED);
-            successMessage.setText("Something went wrong!");
-            ex.printStackTrace();
         }
     }
 
-    // ToDO: Clean Errors after each sign up failure
-    private void cleanErrors(Label lblUsernameError, Label lblEmailError, Label lblPasswordError, Label lblAgreementError, Label successMessage) {
-        lblUsernameError.setText("");
-        lblEmailError.setText("");
-        lblPasswordError.setText("");
-        lblAgreementError.setText("");
-        successMessage.setText("");
+    private void cleanFields() {
+        txtUsername.setText("");
+        txtEmail.setText("");
+        secretField.setText("");
+        rbtnAgreement.setSelected(false);
     }
 
-    private void insertValues(String username, String email, String pass, PreparedStatement insertion) {
-        if (!username.isBlank() && !email.isBlank() && !pass.isBlank() && rbtnAgreement.isSelected()) {
-            if (Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", email)) {
-                if (pass.length() >= 8) {
-                    try {
-                        insertion.execute();
-                        cleanErrors(lblUsernameError, lblEmailError, lblPasswordError, lblAgreementError, successMessage);
-                        successMessage.setText("Signed up successfully!");
-                    } catch (SQLException ex) {
-                        successMessage.setTextFill(Color.RED);
-                        successMessage.setText("Something went wrong!");
-                        ex.printStackTrace();
-                    }
-                } else {
-                    lblPasswordError.setText("Please enter a password 8 characters or more!");
+    private boolean allChecksSucceed(Connection connection, String username, String email, String pass) {
+        cleanErrors();
+        boolean haveBlankValues = haveBlankValues(username, email, pass, rbtnAgreement);
+        if (haveBlankValues == false) {
+            boolean valuesValidated = valuesValidated(username, email, pass);
+            if (valuesValidated == true) {
+                boolean existInRecords = existInRecords(connection, username, email);
+                if (existInRecords == false) {
+                    return true;
                 }
             } else {
-                lblEmailError.setText("Invalid Email!");
+                feedbackMessage.setText("Please check errors!");
+                return false;
             }
+        } else {
+            feedbackMessage.setText("Check Blank fields!");
+            return false;
         }
-        checkBlankValues(username, email, pass, rbtnAgreement);
+        return false;
     }
 
-    private void checkBlankValues(String username, String email, String pass, RadioButton rbtnAgreement) {
-        if (username.isBlank()) {
-            lblUsernameError.setText("Please type your username!");
-        }
-        if (email.isBlank()) {
-            lblEmailError.setText("Please type your email!");
-        }
-        if (pass.isBlank()) {
-            lblPasswordError.setText("Please type your password!");
-        }
-        if (!rbtnAgreement.isSelected()) {
-            lblAgreementError.setText("Please confirm agreement to T&C");
-        }
-    }
-
-    private boolean checkExistanceInRecords(String username, String email, Connection connection) {
+    private boolean existInRecords(Connection connection, String username, String email) {
+        cleanErrors();
         PreparedStatement userCheck, emailCheck;
         try {
             userCheck = connection.prepareStatement("SELECT username FROM registered_users WHERE username = " + "'" + username + "'");
@@ -116,7 +108,7 @@ public class SignUpController {
             ResultSet userCheckResultSet = userCheck.getResultSet();
             if (userCheckResultSet.next()) {
                 lblUsernameError.setText("Please choose another username!");
-                return false;
+                return true;
             }
 
             emailCheck = connection.prepareStatement("SELECT username FROM registered_users WHERE email = " + "'" + email + "'");
@@ -124,20 +116,76 @@ public class SignUpController {
             ResultSet emailCheckResultSet = emailCheck.getResultSet();
             if (emailCheckResultSet.next()) {
                 lblEmailError.setText("Seems you are already registered!");
-                return false;
+                return true;
             }
         } catch (SQLException e) {
-            successMessage.setTextFill(Color.RED);
-            successMessage.setText("Something went wrong!");
+            feedbackMessage.setTextFill(Color.RED);
+            feedbackMessage.setText("Something went wrong!");
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
-    public void toLogIn(ActionEvent e) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+    // Validate 4 conditions
+    private boolean valuesValidated(String username, String email, String pass) {
+        cleanErrors();
+        if (Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", email)) {
+            if (pass.length() >= 8) {
+                if (username.length() >= 3) {
+                    return true;
+                } else {
+                    lblUsernameError.setText("Username too short");
+                    return false;
+                }
+            } else {
+                lblPasswordError.setText("Please enter a password 8 characters or more!");
+                return false;
+            }
+        } else {
+            lblEmailError.setText("Invalid Email!");
+            return false;
+        }
+    }
+
+    private boolean haveBlankValues(String username, String email, String pass, RadioButton radioButtonSelected) {
+        cleanErrors();
+        if (username.isBlank()) {
+            lblUsernameError.setText("Please type your username!");
+            return true;
+        }
+        if (email.isBlank()) {
+            lblEmailError.setText("Please type your email!");
+            return true;
+        }
+        if (pass.isBlank()) {
+            lblPasswordError.setText("Please type your password!");
+            return true;
+        }
+        if (!radioButtonSelected.isSelected()) {
+            lblAgreementError.setText("Please confirm agreement to T&C");
+            return true;
+        }
+        return false;
+    }
+
+    private void cleanErrors() {
+        lblUsernameError.setText("");
+        lblEmailError.setText("");
+        lblPasswordError.setText("");
+        lblAgreementError.setText("");
+        feedbackMessage.setText("");
+    }
+
+    public void toLogIn(ActionEvent e) {
+        try {
+            root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
+        } catch (IOException ex) {
+            feedbackMessage.setTextFill(Color.RED);
+            feedbackMessage.setText("Something went wrong!");
+            ex.printStackTrace();
+        }
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

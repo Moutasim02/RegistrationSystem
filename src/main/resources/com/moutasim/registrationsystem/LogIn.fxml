@@ -33,16 +33,27 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogIn" layoutX="53.0" layoutY="322.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="244.0" style="-fx-background-color: #FC6439; -fx-background-radius: 7px; -fx-text-fill: #fff;" text="Login">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font></Button>
-      <RadioButton fx:id="rbtnRemember" layoutX="53.0" layoutY="284.0" mnemonicParsing="false" text="Remember me" />
       <TextField fx:id="txtEmail" layoutX="53.0" layoutY="172.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </TextField>
+      <PasswordField fx:id="secretField" layoutX="53.0" layoutY="236.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;" />
+      <RadioButton fx:id="rbtnRemember" layoutX="53.0" layoutY="284.0" mnemonicParsing="false" text="Remember me" />
+      <Button fx:id="btnForgotPassword" layoutX="175.0" layoutY="280.0" mnemonicParsing="false" style="-fx-background-color: #fff;" text="Forgot Password?">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnLogIn" layoutX="53.0" layoutY="322.0" mnemonicParsing="false" onAction="#login" prefHeight="29.0" prefWidth="244.0" style="-fx-background-color: #FC6439; -fx-background-radius: 7px; -fx-text-fill: #fff;" text="Login">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="btnToSignUp" layoutX="54.0" layoutY="390.0" mnemonicParsing="false" onAction="#toSignUp" prefWidth="156.0" style="-fx-background-color: #fff;" text="No Account? Sign Up.">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
       <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="53.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/smart-house.png" />
@@ -58,18 +69,11 @@
             <Image url="@images/background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnForgotPassword" layoutX="175.0" layoutY="280.0" mnemonicParsing="false" onAction="#resetPassword" style="-fx-background-color: #fff;" text="Forgot Password?">
+      <Label fx:id="lblMailError" layoutX="98.0" layoutY="146.0" prefHeight="18.0" prefWidth="193.0" textFill="RED" />
+      <Label fx:id="lblPasswordError" layoutX="116.0" layoutY="210.0" prefHeight="18.0" prefWidth="166.0" textFill="RED" />
+      <Label fx:id="feedbackMessage" layoutX="53.0" layoutY="59.0" prefHeight="17.0" prefWidth="227.0">
          <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnToSignUp" layoutX="54.0" layoutY="390.0" mnemonicParsing="false" onAction="#toSignUp" prefWidth="156.0" style="-fx-background-color: #fff;" text="No Account? Sign Up.">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Label fx:id="lblMailError" layoutX="98.0" layoutY="147.0" prefHeight="18.0" prefWidth="193.0" textFill="RED" />
-      <Label fx:id="lblPasswordError" layoutX="125.0" layoutY="211.0" prefHeight="18.0" prefWidth="166.0" textFill="RED" />
-      <PasswordField fx:id="secretField" layoutX="53.0" layoutY="236.0" prefHeight="29.0" prefWidth="244.0" style="-fx-background-radius: 7px;" />
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>
