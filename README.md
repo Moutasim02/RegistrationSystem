@@ -14,6 +14,11 @@
 - Experience the UI as normal user, not developer.
 - Much more...
 
+## How to try it out?
+- Clone the repo, open in IntelliJ IDEA or IDE of choice, and update libraries from the jfx_files in the resources.
+- Execute.
+- Support with star :)
+
 ## Initial(Expected) Design:
 ### Login Screen
 ![image](src/main/resources/com/moutasim/registrationsystem/images/login.png)
