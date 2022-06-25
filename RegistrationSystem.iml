@@ -20,11 +20,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.2" level="project" />
-    <orderEntry type="library" name="javafx.fxml" level="project" />
-    <orderEntry type="library" name="javafx.base" level="project" />
-    <orderEntry type="library" name="javafx.controls" level="project" />
-    <orderEntry type="library" name="javafx.graphics" level="project" />
-    <orderEntry type="library" name="javafx.media" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.29" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="project" />
   </component>
 </module>
