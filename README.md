@@ -15,7 +15,17 @@
 - Much more...
 
 ## Initial(Expected) Design:
-**Login Screen**
+### Login Screen
 ![image](src/main/resources/com/moutasim/registrationsystem/images/login.png)
-**Sign Up Screen**
+## Sign Up Screen
 ![image](src/main/resources/com/moutasim/registrationsystem/images/signup.png)
+
+## Results
+### Login
+![image](src/main/resources/com/moutasim/registrationsystem/images/Screenshot_1.png)
+### Sign Up
+![image](src/main/resources/com/moutasim/registrationsystem/images/Screenshot_2.png)
+### Success login
+![image](src/main/resources/com/moutasim/registrationsystem/images/Screenshot_4.png)
+### Live validation
+![image](src/main/resources/com/moutasim/registrationsystem/images/Screenshot_3.png)

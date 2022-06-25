@@ -16,6 +16,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
             Scene scene = new Scene(root);
             primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("images/smart-house.png")));
+            primaryStage.setResizable(false);
             primaryStage.setTitle("Registration System");
             primaryStage.setScene(scene);
             primaryStage.show();
